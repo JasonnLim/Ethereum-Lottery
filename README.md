@@ -1,4 +1,3 @@
-# User Interface
 ![image](https://user-images.githubusercontent.com/57948673/122089795-b4666800-ce39-11eb-90ac-4f2f6c5ef4cd.png)
 
 # Introduction
