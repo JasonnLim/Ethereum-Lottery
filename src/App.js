@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import web3 from './web3';
 import lottery from './lottery';
-import { Header, Icon, Segment, Button } from 'semantic-ui-react';
+import { Header, Icon, Segment, Button, Input, Grid} from 'semantic-ui-react';
 
 
 class App extends Component {
@@ -68,27 +68,32 @@ class App extends Component {
           <Header as='h2' textAlign='center'>Total Prize Pool</Header>
           <Header as='h1' textAlign='center' color='red'> {web3.utils.fromWei(this.state.balance, 'ether')} ETH</Header>
           <Header as='h4' textAlign='center'>{this.state.players.length} players have entered</Header>
+
+        <Grid><Grid.Row centered><Grid.Column width={4}>
+          <form onSubmit={this.onSubmit}>
+            <div>
+              <Input
+                label={{ basic: true, content: 'ETH' }}
+                labelPosition='right'
+                placeholder='Enter ETH amount'
+                value={this.state.value}
+                onChange={event => this.setState({ value: event.target.value })}
+                fluid
+              />
+            </div>
+            <Button content = "Join Now" icon = "add circle" secondary fluid/>
+          </form>
+        </Grid.Column></Grid.Row></Grid>
+        </Segment>   
+
+        <Header as='h2' textAlign='center'>{this.state.message}</Header>
+        <br/>
+        <Segment>
+          <Header as='h2' textAlign='center'>Admin Only</Header>
+          <Grid><Grid.Row centered><Grid.Column width={3}>
+            <Button onClick={this.onClick} content='Select Winner' fluid></Button>  
+          </Grid.Column></Grid.Row></Grid>
         </Segment>
-
-        <form onSubmit={this.onSubmit}>
-          <h4>Want to try your luck?</h4>
-          <div>
-            <label>Amount of ETH to enter  </label>
-            <input
-              value={this.state.value}
-              onChange={event => this.setState({ value: event.target.value })}
-            />
-          </div>
-          <Button content = "Enter" icon = "add circle" primary/>
-        </form>
-
-        <hr />
-        <h4>Randomly select a winner</h4>
-        <button onClick={this.onClick}>Select Winner</button>
-        <hr />
-
-        <h1>{this.state.message}</h1>
-
       </div>
     );
   }
