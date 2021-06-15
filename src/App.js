@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import './App.css';
 import web3 from './web3';
-//import { render } from '@testing-library/react';
 import lottery from './lottery';
+import { Header, Icon, Segment, Button } from 'semantic-ui-react';
+
 
 class App extends Component {
   //Class based component needs to have state and render method
   state = {
-    manager: '',
     players: [],
     balance: '0',
     value: '',
@@ -16,11 +16,10 @@ class App extends Component {
 
   //This is like a constructor and it runs right after render method
   async componentDidMount() {
-    const manager = await lottery.methods.manager().call();
     const players = await lottery.methods.getPlayers().call();
     const balance = await web3.eth.getBalance(lottery.options.address);
 
-    this.setState({ manager, players, balance });
+    this.setState({ players, balance });
   }
 
   //arrow function
@@ -36,7 +35,7 @@ class App extends Component {
       value: web3.utils.toWei(this.state.value, 'ether')
     });
 
-    this.setState({ message: 'You have entered the lottery!\nPlease refresh the page' });
+    this.setState({ message: 'You have entered the lottery! Please refresh the page' });
   };
 
   onClick = async () => {
@@ -58,13 +57,18 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h2>Ethereum Lottery</h2>
-        <p>This contract is managed by {this.state.manager}
-          <br />There are currently {this.state.players.length} people entered
-          <br />The total prize pool is {web3.utils.fromWei(this.state.balance, 'ether')} ETH
-        </p>
-
-        <hr />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"></link>
+        <Header as='h2' dividing color='red'>
+          <Icon name='ethereum'/>
+          <Header.Content>Ethereum Lottery        
+          <Header.Subheader>Come join us for guranteed prizes</Header.Subheader>
+          </Header.Content>
+        </Header>
+        <Segment>
+          <Header as='h2' textAlign='center'>Total Prize Pool</Header>
+          <Header as='h1' textAlign='center' color='red'> {web3.utils.fromWei(this.state.balance, 'ether')} ETH</Header>
+          <Header as='h4' textAlign='center'>{this.state.players.length} players have entered</Header>
+        </Segment>
 
         <form onSubmit={this.onSubmit}>
           <h4>Want to try your luck?</h4>
@@ -75,7 +79,7 @@ class App extends Component {
               onChange={event => this.setState({ value: event.target.value })}
             />
           </div>
-          <button>Enter</button>
+          <Button content = "Enter" icon = "add circle" primary/>
         </form>
 
         <hr />
