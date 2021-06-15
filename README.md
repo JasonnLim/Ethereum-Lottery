@@ -1,5 +1,5 @@
 # Introduction
-This is a very simple Decentralized lottery web application(Dapp). 
+This is a one page Decentralized lottery web application(Dapp). 
 This Dapp is hosted on Rinkeby test network.
 
 # Setup
@@ -8,5 +8,5 @@ This Dapp is hosted on Rinkeby test network.
 3. Get ETH from Rinkeby Faucet
 
 # How to run
-1. Go to web3.js and follow the comments to change the statement
+1. Locate web3.js in src folder and follow the comments to change the statement
 2. npm start
